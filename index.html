@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Combined JavaScript DOM Manipulation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            background-color: #f4f4f4;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 8px 16px;
+            margin: 5px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .hidden {
+            display: none;
+        }
+        #dynamicElement {
+            padding: 10px;
+            margin: 10px 0;
+            background-color: #e7f3fe;
+            border-left: 6px solid #2196F3;
+        }
+        .highlight {
+            background-color: yellow;
+            color: red;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Combined DOM Manipulation Example</h1>
+    </header>
+
+    <main class="container">
+        <section>
+            <h2 id="changeText">Welcome to DOM Manipulation</h2>
+            <button onclick="changeText()">Change Text</button>
+            <button onclick="changeStyle()">Change Style</button>
+        </section>
+
+        <section>
+            <h3>Element Control Panel</h3>
+            <div id="toggleElement" class="">This element can be toggled</div>
+            <button onclick="toggleElement()">Toggle Element</button>
+            <div id="elementContainer">
+                <p>Existing paragraph</p>
+            </div>
+            <button onclick="addElement()">Add New Element</button>
+            <button onclick="removeElement()">Remove Last Element</button>
+        </section>
+
+        <article>
+            <p>This demonstrates five different HTML elements: headings, paragraphs, buttons, divs, and lists.</p>
+            <ul id="itemList">
+                <li>First list item</li>
+                <li>Second list item</li>
+            </ul>
+        </article>
+    </main>
+
+    <footer>
+        <p>© G-Tech Solutions Ltd.</p>
+    </footer>
+
+    <script>
+        // Function to change text content dynamically
+        function changeText() {
+            const textElement = document.getElementById('changeText');
+            textElement.textContent = 'Text changed successfully!';
+        }
+
+        // Function to modify CSS styles via JavaScript
+        function changeStyle() {
+            const textElement = document.getElementById('changeText');
+            textElement.classList.toggle('highlight');
+        }
+
+        // Function to toggle element visibility
+        function toggleElement() {
+            const element = document.getElementById('toggleElement');
+            element.classList.toggle('hidden');
+        }
+
+        // Function to add new elements
+        function addElement() {
+            const container = document.getElementById('elementContainer');
+            const newElement = document.createElement('p');
+            const count = container.children.length + 1;
+            newElement.textContent = `New element ${count} added dynamically`;
+            container.appendChild(newElement);
+        }
+
+        // Function to remove elements
+        function removeElement() {
+            const container = document.getElementById('elementContainer');
+            if (container.children.length > 1) { // Keep at least one element
+                container.removeChild(container.lastElementChild);
+            } else {
+                alert("Can't remove the last element!");
+            }
+        }
+
+        // Bonus: Change list item colors on hover
+        document.getElementById('itemList').addEventListener('mouseover', function(e) {
+            if (e.target.tagName === 'LI') {
+                e.target.style.color = 'blue';
+            }
+        });
+
+        document.getElementById('itemList').addEventListener('mouseout', function(e) {
+            if (e.target.tagName === 'LI') {
+                e.target.style.color = '';
+            }
+        });
+    </script>
+</body>
+</html>
