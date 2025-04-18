@@ -3,134 +3,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Combined JavaScript DOM Manipulation</title>
+    <title>Combined DOM Manipulation Project</title>
     <style>
         body {
             font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
             max-width: 800px;
             margin: 0 auto;
-            padding: 20px;
-            line-height: 1.6;
+            color: #333;
         }
-        .container {
-            background-color: #f4f4f4;
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .content-section {
+            margin-bottom: 30px;
             padding: 20px;
             border-radius: 5px;
-            margin-bottom: 20px;
+            background-color: #f9f9f9;
         }
-        button {
-            padding: 8px 16px;
-            margin: 5px;
-            background-color: #4CAF50;
+
+        .action-btn {
+            background-color: #3498db;
             color: white;
             border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-        .hidden {
-            display: none;
-        }
-        #dynamicElement {
-            padding: 10px;
-            margin: 10px 0;
-            background-color: #e7f3fe;
-            border-left: 6px solid #2196F3;
-        }
-        .highlight {
-            background-color: yellow;
-            color: red;
-            padding: 10px;
+            padding: 10px 15px;
             border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .action-btn:hover {
+            background-color: #2980b9;
+        }
+
+        .demo-box {
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f0f0f0;
+            transition: all 0.3s ease;
+        }
+
+        .special-message {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #e74c3c;
+            color: white;
+            border-radius: 5px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+            color: #7f8c8d;
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>Combined DOM Manipulation Example</h1>
+        <h1 id="main-heading">Combined DOM Project</h1>
     </header>
-
-    <main class="container">
-        <section>
-            <h2 id="changeText">Welcome to DOM Manipulation</h2>
-            <button onclick="changeText()">Change Text</button>
-            <button onclick="changeStyle()">Change Style</button>
+    
+    <main>
+        <section class="content-section">
+            <p id="dynamic-text">This text will change when you click the button below.</p>
+            <button id="change-text-btn" class="action-btn">Change Text</button>
         </section>
-
-        <section>
-            <h3>Element Control Panel</h3>
-            <div id="toggleElement" class="">This element can be toggled</div>
-            <button onclick="toggleElement()">Toggle Element</button>
-            <div id="elementContainer">
-                <p>Existing paragraph</p>
+        
+        <section class="content-section">
+            <div id="style-demo" class="demo-box">
+                This box's style will change when you hover over it.
             </div>
-            <button onclick="addElement()">Add New Element</button>
-            <button onclick="removeElement()">Remove Last Element</button>
         </section>
-
-        <article>
-            <p>This demonstrates five different HTML elements: headings, paragraphs, buttons, divs, and lists.</p>
-            <ul id="itemList">
-                <li>First list item</li>
-                <li>Second list item</li>
-            </ul>
-        </article>
+        
+        <section class="content-section">
+            <button id="toggle-element-btn" class="action-btn">Toggle Special Message</button>
+            <div id="special-message-container"></div>
+        </section>
     </main>
-
+    
     <footer>
-        <p>© G-Tech Solutions Ltd.</p>
+        <p>&copy; G-Tech Solutions</p>
     </footer>
-
+    
     <script>
-        // Function to change text content dynamically
-        function changeText() {
-            const textElement = document.getElementById('changeText');
-            textElement.textContent = 'Text changed successfully!';
-        }
+        // Change text content dynamically
+        const changeTextBtn = document.getElementById('change-text-btn');
+        const dynamicText = document.getElementById('dynamic-text');
 
-        // Function to modify CSS styles via JavaScript
-        function changeStyle() {
-            const textElement = document.getElementById('changeText');
-            textElement.classList.toggle('highlight');
-        }
-
-        // Function to toggle element visibility
-        function toggleElement() {
-            const element = document.getElementById('toggleElement');
-            element.classList.toggle('hidden');
-        }
-
-        // Function to add new elements
-        function addElement() {
-            const container = document.getElementById('elementContainer');
-            const newElement = document.createElement('p');
-            const count = container.children.length + 1;
-            newElement.textContent = `New element ${count} added dynamically`;
-            container.appendChild(newElement);
-        }
-
-        // Function to remove elements
-        function removeElement() {
-            const container = document.getElementById('elementContainer');
-            if (container.children.length > 1) { // Keep at least one element
-                container.removeChild(container.lastElementChild);
-            } else {
-                alert("Can't remove the last element!");
-            }
-        }
-
-        // Bonus: Change list item colors on hover
-        document.getElementById('itemList').addEventListener('mouseover', function(e) {
-            if (e.target.tagName === 'LI') {
-                e.target.style.color = 'blue';
-            }
+        changeTextBtn.addEventListener('click', () => {
+            dynamicText.textContent = "The text has been changed successfully!";
+            dynamicText.style.color = "#2ecc71";
         });
 
-        document.getElementById('itemList').addEventListener('mouseout', function(e) {
-            if (e.target.tagName === 'LI') {
-                e.target.style.color = '';
+        // Modify CSS styles via JavaScript
+        const styleDemo = document.getElementById('style-demo');
+
+        styleDemo.addEventListener('mouseover', () => {
+            styleDemo.style.backgroundColor = "#3498db";
+            styleDemo.style.color = "white";
+            styleDemo.style.transform = "scale(1.05)";
+            styleDemo.textContent = "Styles changed on hover!";
+        });
+
+        styleDemo.addEventListener('mouseout', () => {
+            styleDemo.style.backgroundColor = "";
+            styleDemo.style.color = "";
+            styleDemo.style.transform = "";
+            styleDemo.textContent = "This box's style will change when you hover over it.";
+        });
+
+        // Add or remove an element when a button is clicked
+        const toggleElementBtn = document.getElementById('toggle-element-btn');
+        const specialMessageContainer = document.getElementById('special-message-container');
+
+        toggleElementBtn.addEventListener('click', () => {
+            const existingMessage = document.querySelector('.special-message');
+            
+            if (existingMessage) {
+                specialMessageContainer.removeChild(existingMessage);
+            } else {
+                const newMessage = document.createElement('div');
+                newMessage.className = 'special-message';
+                newMessage.innerHTML = `
+                    <h3>This is a special message!</h3>
+                    <p>You toggled this element using JavaScript. Click the button again to remove me.</p>
+                `;
+                specialMessageContainer.appendChild(newMessage);
             }
         });
     </script>
